@@ -13,11 +13,11 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new App\Models\User;
+        $user = new \App\Models\User;
         $user->name = "Raihan Ksatria Aframadhan";
-        $user->email = "raihan.aframadhan@gmailcom";
+        $user->email = "raihan.aframadhan@gmail.com";
         $user->level = "admin";
-        $user->password = "raihan30102007";
+        $user->password = bcrypt('12345678');
         $user->save();
     }
 }

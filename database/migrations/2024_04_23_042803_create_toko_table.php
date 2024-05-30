@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('toko_name');
             $table->enum('toko_categorie', ['electronics', 'automotive', 'fashion', 'culinary', 'medicine', 'furniture', 'accesories']);
             $table->text('desc_toko');
-            $table->date('open');
-            $table->date('close');
-            $table->time('close date');
-            $table->time('open date');
+            $table->time('open');
+            $table->time('close');
+            $table->string('open_date');
             $table->boolean('status_active')->default('0');
             $table->string('toko_icon')->default('default.png');
             $table->foreign('id_user')->on('users')->references('id')->onDelete('cascade')->onUpdate('cascade');

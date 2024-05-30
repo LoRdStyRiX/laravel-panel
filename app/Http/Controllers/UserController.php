@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -41,6 +46,8 @@ class UserController extends Controller
         {
             return back()->withErrors($validasi)->withInput();
         }
+        $input['password'] = bcrypt($input['password']);
+
         User::create($input)->with('sucess', 'Data successfully added');
         return back();
     }
@@ -67,14 +74,25 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $data = $request->all();
+        if($request->input('password'))
+        {
+            $data['password'] = bcrypt($data['password']);
+        }else{
+            $data = Arr::except($data, ['password']);
+        }
+        $user->update($data);
+        return redirect('/user');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
-        //
+        $data = User::find($id);
+        $data->delete();
+        return back();
     }
 }

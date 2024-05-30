@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +30,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('user', UserController::class);
+Route::resource('seller', UserController::class);
+Route::resource('profile', ProfileController::class);
+Route::resource('toko', TokoController::class);
+
